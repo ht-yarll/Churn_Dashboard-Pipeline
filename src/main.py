@@ -32,10 +32,11 @@ df = (
 )
 
 treated_df = processor.treat_data(df)
+print(treated_df.dtypes)
 processor.save_to_parquet(treated_df)
 
 
-# #up to gcloud
+#up to gcloud
 storage_client = get_gclient()
 gcs = GStorage(storage_client)
 bucket_name = 'blackstone-churn'
@@ -53,3 +54,5 @@ try:
 
 except Exception as e:
     print(e)
+
+#making bigquery read it
