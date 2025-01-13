@@ -1,10 +1,27 @@
-from pathlib import Path
+import json
 
 import pandas as pd
+import requests
 
-class DataProcess:
-    def __init__(self, output_folder: Path):
-        self.output_folder = output_folder
+
+class DataProcessor:
+    def __init__(self, output_path: str) -> None:
+        self.output_folder = output_path
+
+    def fetch_gupy_data(self, label: str) -> pd.DataFrame:
+        url = f"https://portal.api.gupy.io/api/job?name={label}&offset=0&limit=400"
+        
+        print(f'Fetching data for {label}...')
+
+        try:
+            r = requests.get(url)
+            response = r.json()
+            response = pd.DataFrame(response['data'])
+            print('All data fetched successfully')
+            return response
+           
+        except Exception as e:
+            print(f'Failed to fetch data: {e}')
 
     def treat_data(self, df: pd.DataFrame) -> pd.DataFrame:
         try:
