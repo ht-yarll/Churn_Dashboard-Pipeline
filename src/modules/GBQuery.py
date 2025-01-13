@@ -43,7 +43,7 @@ class GBigQuery:
               destination_table: str = None, 
               ):
         try:
-            job_config = bigquery.QueryJobConfig()
+            job_config = bigquery.QueryJobConfig(write_disposition = 'WRITE_TRUNCATE')
             if destination_table:
                 print(f'Setting destination table to: {destination_table}')
                 job_config.destination = destination_table
