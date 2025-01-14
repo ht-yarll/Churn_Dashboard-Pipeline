@@ -115,11 +115,11 @@ for file in downloads_folder.iterdir():
 #query
 
 excluded_columns = [
-    'gender', 'age', 'partner', 'dependents', 'number_of_dependents', 'married', 
-    'internet_type', 'streaming_music', 'streaming_movies', 'streaming_tv', 
-    'device_protection', 'online_security', 'online_backup', 
-    'internet_service', 'phone_service', 'longitude', 'latitude', 'total_population', 
-    'zip_code', 'city', 'country'
+    'paperless_billing', 'payment_method', 'avg_monthly_long_distance_charges',
+    'total_refunds', 'total_extra_data_charges', 'total_long_distance_charges',
+    'gender', 'age', 'cltv', 'churn_category', 'churn_reason', 'tenure', 'internet_service_y', 
+    'phone_service_y', 'multiple_lines', 'offer', 'country', 'state', 'zip_code', 
+    'total_population'
     ]
 table_id = 'blackstone-446301.user_data.churn_data'
 table = bq_client.get_table(table_id)
