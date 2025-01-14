@@ -45,4 +45,4 @@ df = (
     else pd.read_csv(file_path_list[0], encoding='utf8')
 )
 
-print(df.columns)
+print(df.head)
