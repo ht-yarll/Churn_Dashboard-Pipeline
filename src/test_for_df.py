@@ -29,20 +29,19 @@ for file in files_folder.iterdir():
         file_path_list.append(file)
 
 df_read_csv = (
-    pd.read_csv(files, encoding='utf8') 
+    pd.read_csv(files, header=0, encoding='utf8') 
     for files in file_path_list
 )
 
 df_read_csv = list(df_read_csv)
-df_read_csv = [
-    df.map(lambda x: x.strip() if isinstance(x, str) else x)
-    for df in df_read_csv
-]
+for df in df_read_csv:
+    print(df.columns)
+
 
 df = (
-    pd.concat(df_read_csv, verify_integrity=True, axis=1, ignore_index=True) 
+    pd.concat(df_read_csv, axis=1) 
     if len(file_path_list) > 1 
     else pd.read_csv(file_path_list[0], encoding='utf8')
 )
 
-print(df.head)
+print(df.columns)
