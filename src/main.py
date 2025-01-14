@@ -29,7 +29,7 @@ df_read_csv = (
 # print("Files in folder:", file_path_list)
 
 df = (
-    pd.concat(df_read_csv, ignore_index=True) 
+    pd.concat(df_read_csv,verify_integrity=True, ignore_index=True, axis=1) 
     if len(file_path_list) > 1 
     else pd.read_csv(file_path_list[0], encoding='utf8')
 )
@@ -37,8 +37,8 @@ df = (
 # print("Initial DataFrame shape:", df.shape)
 # print("Initial DataFrame null values:", df.isnull().sum())
 
-df.convert_dtypes()
 treated_df = processor.treat_data(df)
+print(treated_df[['city', 'churn_score']])
 
 #debug
 # print("Treated DataFrame shape:", treated_df.shape)
@@ -118,7 +118,7 @@ excluded_columns = [
     'internet_type', 'streaming_music', 'streaming_movies', 'streaming_tv', 
     'device_protection', 'online_security', 'online_backup', 
     'internet_service', 'phone_service', 'longitude', 'latitude', 'total_population', 
-    'zip_code', 'city', 'country'
+    'zip_code', 'state', 'country', 'cltv', 'city'
     ]
 table_id = 'blackstone-446301.user_data.churn_data'
 table = bq_client.get_table(table_id)
