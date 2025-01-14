@@ -29,7 +29,7 @@ df_read_csv = (
 # print("Files in folder:", file_path_list)
 
 df = (
-    pd.concat(df_read_csv, ignore_index=True, axis=1) 
+    pd.concat(df_read_csv, axis=1, verify_integrity=True) 
     if len(file_path_list) > 1 
     else pd.read_csv(file_path_list[0], encoding='utf8')
 )
@@ -37,7 +37,6 @@ df = (
 # print("Initial DataFrame shape:", df.shape)
 # print("Initial DataFrame null values:", df.isnull().sum())
 
-df.convert_dtypes()
 treated_df = processor.treat_data(df)
 
 #debug
