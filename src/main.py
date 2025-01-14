@@ -31,35 +31,13 @@ result = df_read_csv[0]
 
 for df in df_read_csv[1:]:
     result = pd.merge(result, df, on='customer_id')
-#debug
-# print("Files in folder:", file_path_list)
-
-# df = (
-#     pd.concat(df_read_csv, axis=1, verify_integrity=True) 
-#     if len(file_path_list) > 1 
-#     else pd.read_csv(file_path_list[0], encoding='utf8')
-# )
-#debug
-# print("Initial DataFrame shape:", df.shape)
-# print("Initial DataFrame null values:", df.isnull().sum())
 
 treated_df = processor.treat_data(result)
 
-#debug
-# print("Treated DataFrame shape:", treated_df.shape)
-# print("Treated DataFrame null values:", treated_df.isnull().sum())
 
 df_parquet = processor.save_to_parquet(treated_df)
 
-#debug
-# print(f"Parquet saved at: {processor.output_folder.joinpath('table.parquet')}")
-
 df = pd.read_parquet('data/treated/table.parquet')
-
-#debug
-# print("Read Parquet DataFrame shape:", df.shape)
-# print("Read Parquet DataFrame null values:", df.isnull().sum())
-
 
 #up to gcloud
 storage_client = get_gclient()
