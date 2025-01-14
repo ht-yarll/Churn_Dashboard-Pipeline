@@ -29,7 +29,7 @@ df_read_csv = (
 # print("Files in folder:", file_path_list)
 
 df = (
-    pd.concat(df_read_csv, ignore_index=True) 
+    pd.concat(df_read_csv, ignore_index=True, axis=1) 
     if len(file_path_list) > 1 
     else pd.read_csv(file_path_list[0], encoding='utf8')
 )
